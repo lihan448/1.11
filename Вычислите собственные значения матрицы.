@@ -1,0 +1,29 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def matrix_eigen_analysis(matrix, show_plot=True):
+    """
+    完整的矩阵特征分析
+    """
+    print("=" * 60)
+    print("矩阵特征值与特征向量分析")
+    print("=" * 60)
+    
+    # 显示原始矩阵
+    print(f"\n1. 原始矩阵 A ({matrix.shape[0]}×{matrix.shape[1]})：")
+    print(matrix)
+    
+    # 计算特征值和特征向量
+    eigenvalues, eigenvectors = np.linalg.eig(matrix)
+    
+    print(f"\n2. 特征值（共{len(eigenvalues)}个）：")
+    for i, val in enumerate(eigenvalues):
+        print(f"   λ{i+1} = {val:.6f}", end="")
+        if np.iscomplex(val):
+            print(f" (复数)", end="")
+        print()
+    
+    print(f"\n3. 特征向量（列向量形式）：")
+    for i in range(len(eigenvalues)):
+        print(f"   v{i+1} = ", end="")
+        print_vector(eigenvectors[:, i])
